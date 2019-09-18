@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
+import "Home/InfoTab.dart";
+import 'Auth/AuthenticationPage.dart';
+import 'Home/Homepage.dart';
 
-import 'Home/home.dart';
 
 void main() => runApp(MyApp());
 

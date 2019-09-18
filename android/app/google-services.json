@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "462603565064",
+    "firebase_url": "https://cosmoapp-d1439.firebaseio.com",
+    "project_id": "cosmoapp-d1439",
+    "storage_bucket": "cosmoapp-d1439.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462603565064:android:a66cd12c37130659bc79bd",
+        "android_client_info": {
+          "package_name": "cosmoapp.cosmo_app_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462603565064-qml8khqdpomglvf0picsir7klp8s4736.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cosmoapp.cosmo_app_flutter",
+            "certificate_hash": "1cd9608ade09e49391b589a32fea043383ca07d3"
+          }
+        },
+        {
+          "client_id": "462603565064-rgv4p36dmsfolj64g21ae9ngdqdvdb41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm5VPsNtfDzKW2WAfT6nAIMDEqTiCdE24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462603565064-rgv4p36dmsfolj64g21ae9ngdqdvdb41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
