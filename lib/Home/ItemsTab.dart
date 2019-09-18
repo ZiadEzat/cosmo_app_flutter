@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'detailsTab.dart';
+
 List<Map> items = [
   {"id": "1", "name": "Item 1", "price": "2000", "prevprice": "2500"},
   {"id": "3", "name": "Item 2", "price": "2000", "prevprice": "2500"},
@@ -17,58 +19,100 @@ class ItemsTab extends StatelessWidget {
   final Color secondaryColor = Color(0xff324558);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: primaryColor,
-        appBarTheme: AppBarTheme(
-          color: Colors.white,
-          textTheme: TextTheme(
-            title: TextStyle(
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 4,
+      child: Theme(
+        data: ThemeData(
+          primaryColor: primaryColor,
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            textTheme: TextTheme(
+              title: TextStyle(
+                color: secondaryColor,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            iconTheme: IconThemeData(color: secondaryColor),
+            actionsIconTheme: IconThemeData(
               color: secondaryColor,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
             ),
           ),
-          iconTheme: IconThemeData(color: secondaryColor),
-          actionsIconTheme: IconThemeData(
-            color: secondaryColor,
-          ),
         ),
-      ),
-      home: Scaffold(
-        backgroundColor: Theme.of(context).buttonColor,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('CosmoApp'),
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
+        child: Scaffold(
+          backgroundColor: Theme
+              .of(context)
+              .buttonColor,
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text('CosmoApp'),
+            leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
               Scaffold.of(context).openDrawer();
-            },
+            },),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {},
+              )
+            ],
+            bottom: TabBar(
+              isScrollable: true,
+              labelColor: primaryColor,
+              indicatorColor: primaryColor,
+              unselectedLabelColor: secondaryColor,
+              tabs: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("All"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Face"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Body"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Hair"),
+                ),
+
+              ],
+            ),
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
-            )
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return _buildItem(index);
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                    height: 16,
-                  ),
-              itemCount: items.length),
+          body: TabBarView(
+            children: <Widget>[
+              ListView.separated(
+                padding: const EdgeInsets.all(16.0),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return _buildItem(context, index);
+                },
+                separatorBuilder: (context, index) =>
+                const SizedBox(height: 16.0),
+              ),
+              Container(
+                child: Text("Tab 2"),
+              ),
+              Container(
+                child: Text("Tab 3"),
+              ),
+              Container(
+                child: Text("Tab 4"),
+              ),
+
+            ],
+          ),
+
+
         ),
       ),
     );
   }
 
-  Widget _buildItem(int index) {
+  Widget _buildItem(BuildContext context, int index) {
     Map item = items[index];
     return Align(
       alignment: Alignment.centerLeft,
@@ -131,10 +175,10 @@ class ItemsTab extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.bottomRight,
                             child: RaisedButton(
-                              onPressed: () {},
+                              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => detailsTab()));},
                               color: Colors.blue,
                               child: Text(
-                                "ADD TO CART",
+                                "SEE DETAILS",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
