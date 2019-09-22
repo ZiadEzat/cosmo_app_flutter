@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 final List<Map> articles = [
   {
     "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",

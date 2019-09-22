@@ -1,13 +1,36 @@
 import 'dart:ui';
 import 'package:cosmo_app_flutter/Auth/RegisterationRoute.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:cosmo_app_flutter/Auth/LoginRoute.dart';
 import 'package:cosmo_app_flutter/Home/Homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthenticationPage extends StatelessWidget {
+class AuthenticationPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _AuthenticationPageState();
+  }
+}
+
+class _AuthenticationPageState extends State<AuthenticationPage> {
+  var signedIn = false;
+  final _googleSignIn = GoogleSignIn();
   final String backImg = "assets/images/backimg.jpg";
+
+  @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      Navigator.push(
+          context, CupertinoPageRoute(builder: (context) => Homepage()));
+    }, onError: (err) {
+      print("HUGE EXCEPTION :" + err);
+    });
+    _googleSignIn.signInSilently();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,21 +77,17 @@ class AuthenticationPage extends StatelessWidget {
                         highlightElevation: 0,
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
+                            borderRadius: BorderRadius.circular(5.0)),
                         child: Text(
-                          "Create Account",
+                          "Sign in with Google",
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => RegisterationRoute()),
-                          );
+                          _googleSignIn.signIn();
                         },
                       ),
                     ),
-                    const SizedBox(height: 30.0),
+                    /*const SizedBox(height: 30.0),
                     Text.rich(TextSpan(children: [
                       TextSpan(text: "Already have account? "),
                       WidgetSpan(
@@ -84,7 +103,7 @@ class AuthenticationPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             )),
                       ))
-                    ])),
+                    ])),*/
                   ],
                 ),
               ),
@@ -93,5 +112,13 @@ class AuthenticationPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
   }
 }
