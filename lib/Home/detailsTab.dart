@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class detailsTab extends StatelessWidget {
-  static final String path = "lib/src/pages/ecommerce/ecommerce_detail2.dart";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

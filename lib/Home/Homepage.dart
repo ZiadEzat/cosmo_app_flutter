@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cosmo_app_flutter/Auth/AuthenticationPage.dart';
+import 'package:cosmo_app_flutter/Home/ChatTab.dart';
 import 'package:cosmo_app_flutter/Home/InfoTab.dart';
 import 'package:cosmo_app_flutter/Home/ItemsTab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'ClinicsTab.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -21,14 +24,8 @@ class _HomepageState extends State<Homepage> {
   static List<Widget> _widgetOptions = <Widget>[
     InfoTab(),
     ItemsTab(),
-    Text(
-      'Chat with Doctor',
-      style: optionStyle,
-    ),
-    Text(
-      'Clinics',
-      style: optionStyle,
-    )
+    ChatTab(),
+    ClinicsTab(),
   ];
 
   void _onItemTapped(int index) {
@@ -68,15 +65,30 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                           builder: (context) => AuthenticationPage()));
                 },
-              ), ListTile(title: Text("test"), onTap: (){
-                print("hello world");
-                Firestore.instance  
-                    .collection('articles')
-                    .where("name", isEqualTo: "hello world")
-                    .snapshots()
-                    .listen((data) =>
-                    data.documents.forEach((doc) => print(doc["number"])));
-              },)
+              ),
+              ListTile(
+                title: Text("add article"),
+                onTap: () {
+                  Firestore.instance.collection('articles').add({
+                    "title":
+                        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+                    "author": "Ziad Ezat",
+                    "time": "4 min read",
+                    "image": "assets/images/backimg.jpg"
+                  });
+                },
+              ),
+              ListTile(
+                title: Text("add item"),
+                onTap: () {
+                  Firestore.instance.collection('offers').add({
+                    "id": "1",
+                    "name": "Item 1",
+                    "price": "2000",
+                    "prevprice": "2500"
+                  });
+                },
+              )
             ],
           ),
         ),
@@ -87,7 +99,7 @@ class _HomepageState extends State<Homepage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.wb_incandescent),
-              title: Text('Tips'),
+              title: Text('article'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),

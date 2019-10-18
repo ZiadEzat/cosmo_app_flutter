@@ -7,6 +7,7 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
+
         android:name="io.flutter.app.FlutterApplication"
         android:label="cosmo_app_flutter"
         android:icon="@mipmap/ic_launcher">
@@ -23,11 +24,17 @@
                  defined in @style/LaunchTheme). -->
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-                android:value="true" />
+                android:value="true"
+                />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCm5VPsNtfDzKW2WAfT6nAIMDEqTiCdE24"/>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 </manifest>

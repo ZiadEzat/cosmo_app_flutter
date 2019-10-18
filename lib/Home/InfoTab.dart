@@ -1,51 +1,59 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 
 final List<Map> articles = [
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
-    "title": "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "title":
+        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
@@ -81,15 +89,16 @@ class InfoTab extends StatelessWidget {
           ),
         ),
         child: Scaffold(
-          backgroundColor: Theme
-              .of(context)
-              .buttonColor,
+          backgroundColor: Theme.of(context).buttonColor,
           appBar: AppBar(
             centerTitle: true,
             title: Text('CosmoApp'),
-            leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },),
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),
@@ -127,15 +136,24 @@ class InfoTab extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              ListView.separated(
-                padding: const EdgeInsets.all(16.0),
-                itemCount: articles.length,
-                itemBuilder: (context, index) {
-                  return _buildArticleItem(index);
-                },
-                separatorBuilder: (context, index) =>
-                const SizedBox(height: 16.0),
-              ),
+              StreamBuilder(
+                  stream: Firestore.instance.collection('articles').snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Text('Loading...');
+                    } else {
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(16.0),
+                        itemCount: snapshot.data.documents.length,
+                        itemBuilder: (context, index) {
+                          return _buildArticleItem(
+                              context, snapshot.data.documents[index]);
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16.0),
+                      );
+                    }
+                  }),
               Container(
                 child: Text("Tab 2"),
               ),
@@ -150,15 +168,12 @@ class InfoTab extends StatelessWidget {
               ),
             ],
           ),
-
-
         ),
       ),
     );
   }
 
-  Widget _buildArticleItem(int index) {
-    Map article = articles[index];
+  Widget _buildArticleItem(BuildContext context, DocumentSnapshot document) {
     return Container(
       color: Colors.white,
       child: Stack(
@@ -179,7 +194,7 @@ class InfoTab extends StatelessWidget {
                   color: Colors.blue,
                   width: 80.0,
                   child: Image.asset(
-                    article["image"],
+                    document["image"],
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -188,7 +203,7 @@ class InfoTab extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        article["title"],
+                        document["title"].toString(),
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                           color: secondaryColor,
@@ -203,14 +218,15 @@ class InfoTab extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: 15.0,
                                 backgroundColor: primaryColor,
-                                backgroundImage: AssetImage("assets/images/user.jpg"),
+                                backgroundImage:
+                                    AssetImage("assets/images/user.jpg"),
                               ),
                             ),
                             WidgetSpan(
                               child: const SizedBox(width: 5.0),
                             ),
                             TextSpan(
-                                text: article["author"],
+                                text: document["author"],
                                 style: TextStyle(fontSize: 16.0)),
                             WidgetSpan(
                               child: const SizedBox(width: 20.0),
@@ -219,7 +235,7 @@ class InfoTab extends StatelessWidget {
                               child: const SizedBox(width: 5.0),
                             ),
                             TextSpan(
-                              text: article["time"],
+                              text: document["time"],
                             ),
                           ],
                         ),

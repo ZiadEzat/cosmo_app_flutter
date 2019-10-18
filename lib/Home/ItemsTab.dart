@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -84,14 +85,22 @@ class ItemsTab extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              ListView.separated(
-                padding: const EdgeInsets.all(16.0),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return _buildItem(context, index);
-                },
-                separatorBuilder: (context, index) =>
-                const SizedBox(height: 16.0),
+              StreamBuilder(
+                stream: Firestore.instance.collection("offers").snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text("Loading...");
+                  }
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: snapshot.data.documents.length,
+                    itemBuilder: (context, index) {
+                      return _buildItem(context, snapshot.data.documents[index]);
+                    },
+                    separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16.0),
+                  );
+                }
               ),
               Container(
                 child: Text("Tab 2"),
@@ -112,11 +121,10 @@ class ItemsTab extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index) {
-    Map item = items[index];
+  Widget _buildItem(BuildContext context, DocumentSnapshot document) {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: ClipRRect(
+        alignment: Alignment.centerLeft,
+        child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Material(
           //elevation: 2,
@@ -146,7 +154,7 @@ class ItemsTab extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          item["name"],
+                          document["name"],
                           style: TextStyle(fontSize: 22),
                         ),
                         Padding(
