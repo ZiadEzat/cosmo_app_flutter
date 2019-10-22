@@ -140,17 +140,68 @@ class InfoTab extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    child: Stack(children: <Widget>[
-                      Image.network(
-                          "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg")
-                    ,Align(child: Container( color: Colors.black, height: 00,)),
-                    ]),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => ArticleRoute("Enlarged Pores", "https://www.laserclinics.com.au/globalassets/service-categories/skin/skin-treatments-landing-page/cosmedical-grade-peels-01.jpg")));
+                      },
+                      child: Container(
+                        child: Stack(
+                            alignment: AlignmentDirectional.bottomCenter,
+                            children: <Widget>[
+                              Container(
+                                width: 500,
+                                color: Colors.white,
+                                child: Image.network(
+                                  "https://laserandskin.ie/wp-content/uploads/2016/03/Affirm-Laser-1500x1000.png",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Container(
+                                color: Colors.black.withOpacity(0.6),
+                                height: 100,
+                                width: MediaQuery.of(context).size.width,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "Skin Concerns",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width /
+                                                90,
+                                      ),
+                                      Text(
+                                        "Whatever it is that’s bothering you, we have a skin treatment to tackle it. ",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 child: Text("Tab 2"),
