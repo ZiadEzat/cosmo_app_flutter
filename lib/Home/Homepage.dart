@@ -23,7 +23,7 @@ class _HomepageState extends State<Homepage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     InfoTab(),
-    ItemsTab(),
+    ItemsTab(false),
     ChatTab(),
     ClinicsTab(),
   ];
@@ -99,7 +99,7 @@ class _HomepageState extends State<Homepage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.wb_incandescent),
-              title: Text('article'),
+              title: Text('Articles'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),

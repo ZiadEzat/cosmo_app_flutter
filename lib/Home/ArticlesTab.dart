@@ -7,56 +7,56 @@ import 'ArticleRoute.dart';
 final List<Map> articles = [
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
   },
   {
     "title":
-        "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
+    "Lorem ipsum dolor sit ametconsectetur adipiscing elit. Nunc malesuada",
     "author": "Ziad Ezat",
     "time": "4 min read",
     "image": "assets/images/backimg.jpg"
@@ -140,17 +140,27 @@ class InfoTab extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    child: Stack(children: <Widget>[
-                      Image.network(
-                          "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg")
-                    ,Align(child: Container( color: Colors.black, height: 00,)),
-                    ]),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Stack(
+                          alignment: AlignmentDirectional.bottomCenter,
+                          children: <Widget>[
+                            Image.network(
+                                "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg"),
+                            Container(
+                              color: Colors.black.withOpacity(0.6),
+                              height: 100,
+                              width: MediaQuery.of(context).size.width,
+                              child: Text("Skin Concerns"),
+                            ),
+                          ]),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 child: Text("Tab 2"),
@@ -217,7 +227,7 @@ class InfoTab extends StatelessWidget {
                                 radius: 15.0,
                                 backgroundColor: primaryColor,
                                 backgroundImage:
-                                    AssetImage("assets/images/user.jpg"),
+                                AssetImage("assets/images/user.jpg"),
                               ),
                             ),
                             WidgetSpan(

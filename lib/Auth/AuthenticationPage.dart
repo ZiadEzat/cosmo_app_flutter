@@ -59,14 +59,14 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                     ),
                     const SizedBox(height: 10.0),
                     Text(
-                      "CosmoApp",
+                      "CosmoCare",
                       style: TextStyle(
                           color: Colors.blue,
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20.0),
-                    Text("Slogan. Lorem. Ipsum. ",
+                    Text("Beauty is a MUST",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 18.0)),
                     const SizedBox(height: 30.0),

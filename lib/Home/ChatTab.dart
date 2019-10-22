@@ -6,8 +6,11 @@ class ChatTab extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+
+
     return _chatTabState();
   }
+
 }
 
 final Color primaryColor = Colors.blue;
@@ -17,6 +20,7 @@ final Color secondaryColor = Color(0xff324558);
 class _chatTabState extends State<ChatTab> {
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
         initialIndex: 0,
         length: 1,
@@ -107,7 +111,7 @@ Widget _buildItem(BuildContext context, DocumentSnapshot document) {
                 ),
                 const SizedBox(width: 20),
                 Container(
-                  width: 100,
+                  width: MediaQuery.of(context).size.width / 3.6,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -127,7 +131,7 @@ Widget _buildItem(BuildContext context, DocumentSnapshot document) {
                     ],
                   ),
                 ),
-                const SizedBox(width: 80),
+                SizedBox(width: MediaQuery.of(context).size.width / 12),
                 Column(
                   children: <Widget>[
                     Container(
@@ -139,7 +143,7 @@ Widget _buildItem(BuildContext context, DocumentSnapshot document) {
 
                       ),
                       height: 32,
-                      width: 100,
+                      width: MediaQuery.of(context).size.width / 4,
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
@@ -152,6 +156,9 @@ Widget _buildItem(BuildContext context, DocumentSnapshot document) {
                           ),
                           IconButton(
                             icon: Icon(Icons.info, color: primaryColor),
+                            onPressed: () {
+                              print(MediaQuery.of(context).size.width);}
+                            ,
                           )
                         ],
                       ),
